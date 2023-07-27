@@ -1,6 +1,12 @@
-import React from "react";
+import { useState } from 'react';
+import BaseModal from "./BaseModal";
 
 const SiteNavigation = () => {
+  const [showModal, setShowModal] = useState(false);
+  function toggleModal() {
+    setShowModal(!showModal);
+  }
+
   return (
     <div>
       <header className="sticky top-0">
@@ -12,9 +18,22 @@ const SiteNavigation = () => {
           </p>
           <p className="absolute top-1/2 right-4 -translate-y-1/2 text-xs text-white space-x-4">
             <i className="fa-solid fa-pen-to-square cursor-pointer"></i>
-            <i className="fa-solid fa-circle-info cursor-pointer"></i>
+            <i className="fa-solid fa-circle-info cursor-pointer" onClick={toggleModal}></i>
           </p>
         </nav>
+        {showModal &&
+          <BaseModal modalClose={toggleModal}>
+            <div className="text-black text-sm mb-8">
+              <div className="border-b border-gray-500 text-xl mb-8 pb-2">
+                Information About System
+              </div>
+              <div className="font-light text-xs text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+            </div>
+          </BaseModal>
+        }
       </header>
     </div>
   );
